@@ -1,0 +1,43 @@
+public class Reverse {
+	
+	public void reverse(String s){
+		
+		if(s==null || s==" ")
+			return;
+		if(!s.contains(" ")){
+			System.out.println(s);
+			return;
+		}
+		String[] temp =s.split(" ");
+		StringBuffer result=new StringBuffer();
+		for(int i=temp.length-1;i>=0;i--){
+			System.out.println(temp[i]);
+			if(i!=0){
+				boolean local = temp[i].endsWith("!");
+				if(!local){
+					result.append(temp[i]);
+				}else{
+					result.append("!");
+					temp[i]=temp[i].replace("!","");
+					result.append(temp[i]);
+				}
+				result.append(" ");
+			}else{
+				result.append(temp[i]);	
+			}				
+		}
+		System.out.println(result);
+	}
+	
+	public static void main(String[] args){
+		String a= "I love China!";
+		Reverse test = new Reverse();
+		test.reverse(a);
+		String b = "HAHAHA";
+		test.reverse(b);
+	}
+}
+
+
+输出为：
+!China love I
