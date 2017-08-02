@@ -1,0 +1,79 @@
+判断字符串里的括号（){}[]是否匹配
+
+
+import java.util.Stack;
+
+public class ReverseStack {
+
+	public void reverseByStack(String str){
+		
+		if(str.length()==0){
+			System.out.println("The input string is empty!");
+			return;
+		}
+		
+		Stack st = new Stack();
+		for(int i=0;i<str.length();i++){
+			char c=str.charAt(i);
+			System.out.print(c);
+			st.push(c);
+		}
+		System.out.println();
+		while(!st.isEmpty()){
+			System.out.print(st.pop());
+		}
+	}
+	
+	public boolean judgeMath(String str){
+		if(str.length()==0){
+			System.out.println("The input string is empty!");
+			return false;
+		}
+		
+		Stack stack = new Stack();
+		for(int i=0;i<str.length();i++){
+			char c=str.charAt(i);	
+			switch(c)
+			{
+			case '(':
+			case '[':
+			case '{':
+				System.out.println(c);
+				stack.push(c);
+				break;
+			case ')':
+			case ']':
+			case '}':
+				if(!stack.isEmpty()){
+					char out = (Character) stack.pop();
+					System.out.println(c);
+					if((c==')' && out!='(') ||
+					   (c==']' && out!='[') ||
+					   (c=='}' && out!='{')){
+						   System.out.println("Error:"+c+"at"+i);
+						   return false;
+					   }
+				}
+				else{
+					System.out.println("Error:"+c+"at"+i);
+					return false;
+				}
+			default:
+				break;
+				}
+				
+			}
+		if(!stack.isEmpty()){
+			System.out.println("Error: there still left char");
+			return false;
+		}			
+		return true;
+	}
+	
+	public static void main(String[] args){
+		ReverseStack test = new ReverseStack();
+		String s = "3test1";
+		//test.reverseByStack(s);
+		System.out.println(test.judgeMath("a[b[sc(d)]]"));
+	}
+}
